@@ -1,18 +1,18 @@
+import { useContext } from 'react';
+import { TodosContext } from '../../context';
 import styles from './TodoItem.module.css';
 
-export const TodoItem = ({
-    todo,
-    index,
-    isEditing,
-    editingTitle,
-    isUpdating,
-    isDeleting,
-    onEditTitleChange,
-    onSave,
-    onCancel,
-    onStartEdit,
-    onDelete,
-}) => {
+export const TodoItem = ({ todo, index, isEditing, onSave }) => {
+    const {
+        editingTitle,
+        isUpdating,
+        isDeleting,
+        handleTitleChange,
+        cancelEditing,
+        startEditing,
+        requestDeleteTodo,
+    } = useContext(TodosContext);
+
     const { id, title } = todo;
 
     return (
@@ -22,7 +22,7 @@ export const TodoItem = ({
                     <input
                         type="text"
                         value={editingTitle}
-                        onChange={(e) => onEditTitleChange(e.target.value)}
+                        onChange={(e) => handleTitleChange(e.target.value)}
                         className={styles.input}
                         disabled={isUpdating}
                     />
@@ -39,7 +39,7 @@ export const TodoItem = ({
                             type="button"
                             className={styles.cancelBtn}
                             disabled={isUpdating}
-                            onClick={onCancel}
+                            onClick={cancelEditing}
                         >
                             Отмена
                         </button>
@@ -55,7 +55,7 @@ export const TodoItem = ({
                             type="button"
                             className={styles.editBtn}
                             disabled={isUpdating || isDeleting}
-                            onClick={() => onStartEdit(id, title)}
+                            onClick={() => startEditing(id, title)}
                         >
                             Редактировать
                         </button>
@@ -63,7 +63,7 @@ export const TodoItem = ({
                             type="button"
                             className={styles.deleteBtn}
                             disabled={isUpdating || isDeleting}
-                            onClick={() => onDelete(id)}
+                            onClick={() => requestDeleteTodo(id)}
                         >
                             Удалить
                         </button>

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
     useRequestAddTodo,
     useRequestDeleteTodo,
@@ -10,6 +11,7 @@ import { TodosList } from '../TodosList/TodosList';
 import { AddTodoButton } from '../AddTodoButton/AddTodoButton';
 import { SortTodoButton } from '../SortTodoButton/SortTodoButton';
 import { SearchTodos } from '../SearchTodos/SearchTodos';
+import { TodosContext } from '../../context';
 
 export const TodosContainer = () => {
     const { todos, isLoading, setTodos } = useRequestGetTodos();
@@ -27,25 +29,41 @@ export const TodosContainer = () => {
     const { filteredAndSortedTodos, sortOrder, searchQuery, setSearchQuery, toggleSortOrder } =
         useTodosFilter(todos);
 
+    const contextValue = useMemo(
+        () => ({
+            editingTitle,
+            isUpdating,
+            isDeleting,
+            handleTitleChange,
+            cancelEditing,
+            startEditing,
+            requestDeleteTodo,
+        }),
+        [
+            editingTitle,
+            isUpdating,
+            isDeleting,
+            handleTitleChange,
+            cancelEditing,
+            startEditing,
+            requestDeleteTodo,
+        ]
+    );
+
     return (
         <div className={styles.todos}>
             <div className={styles.todosFilters}>
                 <SortTodoButton sortOrder={sortOrder} toggleSortOrder={toggleSortOrder} />
                 <SearchTodos searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             </div>
-            <TodosList
-                todos={filteredAndSortedTodos}
-                isLoading={isLoading}
-                editingId={editingId}
-                editingTitle={editingTitle}
-                isUpdating={isUpdating}
-                isDeleting={isDeleting}
-                onEditTitleChange={handleTitleChange}
-                onSaveTodo={requestUpdateTodo}
-                onCancelEdit={cancelEditing}
-                onStartEdit={startEditing}
-                onDeleteTodo={requestDeleteTodo}
-            />
+            <TodosContext value={contextValue}>
+                <TodosList
+                    todos={filteredAndSortedTodos}
+                    isLoading={isLoading}
+                    editingId={editingId}
+                    onSaveTodo={requestUpdateTodo}
+                />
+            </TodosContext>
             <AddTodoButton isCreating={isCreating} onAddTodo={requestAddTodo} />
         </div>
     );

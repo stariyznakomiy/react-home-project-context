@@ -1,19 +1,7 @@
 import { TodoItem } from '../TodoItem/TodoItem';
 import styles from './TodosList.module.css';
 
-export const TodosList = ({
-    todos,
-    isLoading,
-    editingId,
-    editingTitle,
-    isUpdating,
-    isDeleting,
-    onEditTitleChange,
-    onSaveTodo,
-    onCancelEdit,
-    onStartEdit,
-    onDeleteTodo,
-}) => {
+export const TodosList = ({ todos, isLoading, editingId, onSaveTodo }) => {
     if (isLoading) {
         return <div className={styles.loader}></div>;
     }
@@ -26,14 +14,7 @@ export const TodosList = ({
                     todo={todo}
                     index={index}
                     isEditing={editingId === todo.id}
-                    editingTitle={editingTitle}
-                    isUpdating={isUpdating}
-                    isDeleting={isDeleting}
-                    onEditTitleChange={onEditTitleChange}
                     onSave={() => onSaveTodo(todo.id)}
-                    onCancel={onCancelEdit}
-                    onStartEdit={onStartEdit}
-                    onDelete={onDeleteTodo}
                 />
             ))}
         </ul>
