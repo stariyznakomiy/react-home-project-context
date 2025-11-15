@@ -16,7 +16,7 @@ export const TodoItem = ({
     const { id, title } = todo;
 
     return (
-        <div className={styles.todoItem}>
+        <li className={styles.todoItem}>
             {isEditing ? (
                 <>
                     <input
@@ -70,6 +70,6 @@ export const TodoItem = ({
                     </div>
                 </>
             )}
-        </div>
+        </li>
     );
 };

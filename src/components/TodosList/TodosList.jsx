@@ -19,7 +19,7 @@ export const TodosList = ({
     }
 
     return (
-        <div className={styles.todoList}>
+        <ul className={styles.todoList}>
             {todos.map((todo, index) => (
                 <TodoItem
                     key={todo.id}
@@ -36,6 +36,6 @@ export const TodosList = ({
                     onDelete={onDeleteTodo}
                 />
             ))}
-        </div>
+        </ul>
     );
 };

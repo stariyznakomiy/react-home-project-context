@@ -1,5 +1,6 @@
 .todoList {
   display: block;
+  padding: 0;
 }
 
 .loader {
