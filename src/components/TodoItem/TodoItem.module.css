@@ -1,0 +1,87 @@
+.todoItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #c2c2c2;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: left;
+}
+
+.todoItem:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 20px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 4px;
+}
+
+.editBtn,
+.deleteBtn {
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editBtn {
+  background-color: #495057;
+}
+
+.editBtn:hover {
+  background-color: #3b4046;
+}
+
+.deleteBtn {
+  background-color: #c82333;
+}
+
+.deleteBtn:hover {
+  background-color: #a81d2b;
+}
+
+.saveBtn,
+.cancelBtn {
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.saveBtn {
+  background-color: #218838;
+}
+
+.saveBtn:hover {
+  background-color: #19682a;
+}
+
+.cancelBtn {
+  background-color: #c82333;
+}
+
+.cancelBtn:hover {
+  background-color: #a81d2b;
+}
+
+.saveBtn:disabled,
+.cancelBtn:disabled,
+.editBtn:disabled,
+.deleteBtn:disabled {
+  background-color: #cccccc;
+  pointer-events: none;
+}
